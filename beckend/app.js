@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 const app = express();
 const PORT = 5000;
@@ -11,10 +11,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Conexão ao banco de dados MySQL
-const db = mysql2.createConnection({
+const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', 
-  password: 'simba123', 
+  user: 'root', // substitua pelo seu usuário MySQL
+  password: 'simba123', // substitua pela sua senha MySQL
   database: 'form_violao'
 });
 
@@ -28,9 +28,9 @@ db.connect(err => {
 
 // Rota para receber os dados do formulário e salvar no banco de dados
 app.post('/submit-form', (req, res) => {
-  const {  marca, corda, messagem } = req.body;
-  const query = 'INSERT INTO submissions ( marca, corda, messagem ) VALUES (?, ?, ?)';
-  db.query(query, [ marca, corda, messagem ], (err, result) => {
+  const { marca, cordas, mensagem } = req.body;
+  const query = 'INSERT INTO violoes (marca, cordas, mensagem) VALUES (?, ?, ?)';
+  db.query(query, [marca, cordas, mensagem], (err, result) => {
     if (err) {
       console.error('Error inserting data into database:', err);
       res.status(500).json({ error: 'Failed to insert data into database' });
