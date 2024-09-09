@@ -24,9 +24,9 @@ const Formulario = () => {
   // Validação do formulário
   const validate = () => {
     const errors = {};
-    if (!formData.nome) errors.nome = 'Marca é obrigatória';
-    if (!formData.instrumento) errors.instrumento = 'Corda é obrigatória';
-    if (!formData.contato) errors.contato = 'Mensagem é obrigatória';
+    if (!formData.nome) errors.nome = 'Nome é obrigatório';
+    if (!formData.instrumento) errors.instrumento = 'Instrumento é obrigatória';
+    if (!formData.contato) errors.contato = 'Contato é obrigatória';
     return errors;
   };
 
@@ -51,7 +51,7 @@ const Formulario = () => {
 
   return (
     <div>
-      <h2>Formulário de Exemplo</h2>
+      <h2>Cadastro músico</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nome">Nome:</label>
@@ -77,7 +77,7 @@ const Formulario = () => {
         </div>
         <div>
           <label htmlFor="contato">Contato:</label>
-          <input
+            <input
             type="number"
             id="Contato"
             name="Contato"
