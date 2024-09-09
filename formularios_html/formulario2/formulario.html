@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <script>
+        // Função para validar e enviar o formulário
+        function enviarFormulario(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const formData = new FormData(document.getElementById("formulario"));
+
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                document.getElementById("formulario").reset();
+            })
+            .catch(error => {
+                console.error('Erro ao enviar o formulário:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastro de Usuário</h1>
+    <form id="formulario" onsubmit="enviarFormulario(event)">
+        <label for="animal">animal:</label>
+        <input type="text" id="animal" name="animal" required>
+        <br>
+        <label for="raca">raça:</label>
+        <input type="text" id="raca" name="raca" required>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
