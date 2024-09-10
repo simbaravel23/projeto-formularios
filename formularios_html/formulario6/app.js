@@ -18,7 +18,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'simba123',
-    database: 'meubanco'
+    database: 'meubanco4'
 });
 
 db.connect(err => {
@@ -30,14 +30,14 @@ db.connect(err => {
 
 // Rota para exibir o formulário HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'formulario.html'));
 });
 
 // Rota para processar o formulário
 app.post('/submit', (req, res) => {
-    const { nome, email } = req.body;
-    const query = 'INSERT INTO usuarios (nome, email) VALUES (?, ?)';
-    db.query(query, [nome, email], (err, results) => {
+    const { cor, modelo } = req.body;
+    const query = 'INSERT INTO usuarios (cor, modelo) VALUES (?, ?)';
+    db.query(query, [cor, modelo], (err, results) => {
         if (err) {
             res.status(500).send('Erro ao inserir dados');
             throw err;

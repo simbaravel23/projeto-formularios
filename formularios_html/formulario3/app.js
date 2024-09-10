@@ -30,13 +30,13 @@ db.connect(err => {
 
 // Rota para exibir o formulário HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'formulario.html'));
 });
 
 // Rota para processar o formulário
 app.post('/submit', (req, res) => {
     const { carro, modelo } = req.body;
-    const query = 'INSERT INTO usuarios (carro, modelo) VALUES (?, ?)';
+    const query = 'INSERT INTO usuarios2 (carro, modelo) VALUES (?, ?)';
     db.query(query, [carro, modelo], (err, results) => {
         if (err) {
             res.status(500).send('Erro ao inserir dados');

@@ -30,7 +30,7 @@ db.connect(err => {
 
 // Rota para exibir o formulário HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'formulario.html'));
 });
 
 // Rota para processar o formulário
