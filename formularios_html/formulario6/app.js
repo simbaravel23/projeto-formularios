@@ -18,7 +18,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'simba123',
-    database: 'meubanco4'
+    database: 'meubanco5'
 });
 
 db.connect(err => {
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 // Rota para processar o formulário
 app.post('/submit', (req, res) => {
     const { cor, modelo } = req.body;
-    const query = 'INSERT INTO usuarios (cor, modelo) VALUES (?, ?)';
+    const query = 'INSERT INTO usuarios5 (cor, modelo) VALUES (?, ?)';
     db.query(query, [cor, modelo], (err, results) => {
         if (err) {
             res.status(500).send('Erro ao inserir dados');
