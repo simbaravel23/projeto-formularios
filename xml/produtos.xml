@@ -1,0 +1,14 @@
+<produtos>
+    <produto>
+        <nome>Notebook</nome>
+        <preço>2500.00</preço>
+    </produto>
+    <produto>
+        <nome>Smartphone</nome>
+        <preço>1500.00</preço>
+    </produto>
+    <produto>
+        <nome>Headphone</nome>
+        <preço>300.00</preço>
+    </produto>
+</produtos>

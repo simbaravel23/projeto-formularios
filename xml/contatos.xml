@@ -1,0 +1,17 @@
+<contatos>
+    <contato>
+        <nome>João</nome>
+        <email>joao@example.com</email>
+        <telefone>1234-5678</telefone>
+    </contato>
+    <contato>
+        <nome>Maria</nome>
+        <email>maria@example.com</email>
+        <telefone>9876-5432</telefone>
+    </contato>
+    <contato>
+        <nome>Pedro</nome>
+        <email>pedro@example.com</email>
+        <telefone>1122-3344</telefone>
+    </contato>
+</contatos>

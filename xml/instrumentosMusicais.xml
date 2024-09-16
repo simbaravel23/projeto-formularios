@@ -1,0 +1,17 @@
+<instrumentos>
+    <instrumento>
+        <nome>Piano</nome>
+    </instrumento>
+    <instrumento>
+        <nome>Guitarra</nome>
+    </instrumento>
+    <instrumento>
+        <nome>Bateria</nome>
+    </instrumento>
+    <instrumento>
+        <nome>Violino</nome>
+    </instrumento>
+    <instrumento>
+        <nome>Saxofone</nome>
+    </instrumento>
+</instrumentos>

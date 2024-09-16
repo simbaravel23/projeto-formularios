@@ -1,0 +1,14 @@
+<notas>
+    <nota>
+        <aluno>Ana</aluno>
+        <valor>9.5</valor>
+    </nota>
+    <nota>
+        <aluno>Pedro</aluno>
+        <valor>7.8</valor>
+    </nota>
+    <nota>
+        <aluno>Clara</aluno>
+        <valor>8.9</valor>
+    </nota>
+</notas>

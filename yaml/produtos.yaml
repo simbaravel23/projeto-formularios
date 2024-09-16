@@ -1,0 +1,7 @@
+produtos:
+  - nome: Notebook
+    preço: 2500.00
+  - nome: Smartphone
+    preço: 1500.00
+  - nome: Headphone
+    preço: 300.00

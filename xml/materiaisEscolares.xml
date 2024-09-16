@@ -1,0 +1,17 @@
+<materiaisEscolares>
+    <material>
+        <nome>Caderno</nome>
+    </material>
+    <material>
+        <nome>Caneta</nome>
+    </material>
+    <material>
+        <nome>Lápis</nome>
+    </material>
+    <material>
+        <nome>Borracha</nome>
+    </material>
+    <material>
+        <nome>Marcador</nome>
+    </material>
+</materiaisEscolares>
