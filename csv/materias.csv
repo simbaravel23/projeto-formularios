@@ -1,0 +1,6 @@
+id,nome,tipo,quantidade_unidade
+1,Aço,Metal,1000kg
+2,Madeira,Madeira,500m³
+3,Plástico,Polímero,2000kg
+4,Vidro,Inorgânico,300m²
+5,Tecido,Fibra,1000m

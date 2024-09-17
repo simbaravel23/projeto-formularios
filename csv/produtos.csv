@@ -1,0 +1,6 @@
+id,nome,categoria,preço,estoque
+1,Smartphone,Eletrônico,700,50
+2,Smartwatch,Eletrônico,150,150
+3,Headphones,Eletrônico,80,200
+4,Notebook,Eletrônico,1200,30
+5,Tablet,Eletrônico,300,100
