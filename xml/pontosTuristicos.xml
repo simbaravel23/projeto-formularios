@@ -1,0 +1,14 @@
+<pontosTuristicos>
+    <ponto>
+        <nome>Torre Eiffel</nome>
+        <localização>Paris, França</localização>
+    </ponto>
+    <ponto>
+        <nome>Grand Canyon</nome>
+        <localização>Arizona, EUA</localização>
+    </ponto>
+    <ponto>
+        <nome>Muralha da China</nome>
+        <localização>China</localização>
+    </ponto>
+</pontosTuristicos>

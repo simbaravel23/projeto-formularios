@@ -1,0 +1,22 @@
+<animais>
+    <animal>
+        <nome>Elefante</nome>
+        <tipo>Mamífero</tipo>
+    </animal>
+    <animal>
+        <nome>Gato</nome>
+        <tipo>Mamífero</tipo>
+    </animal>
+    <animal>
+        <nome>Cachorro</nome>
+        <tipo>Mamífero</tipo>
+    </animal>
+    <animal>
+        <nome>Leão</nome>
+        <tipo>Mamífero</tipo>
+    </animal>
+    <animal>
+        <nome>Pinguim</nome>
+        <tipo>Ave</tipo>
+    </animal>
+</animais>

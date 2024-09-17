@@ -1,0 +1,11 @@
+animais:
+  - nome: Elefante
+    tipo: Mamífero
+  - nome: Gato
+    tipo: Mamífero
+  - nome: Cachorro
+    tipo: Mamífero
+  - nome: Leão
+    tipo: Mamífero
+  - nome: Pinguim
+    tipo: Ave
