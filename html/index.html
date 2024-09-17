@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura de Arquivo JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #json-data {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Leitura de Arquivo JSON</h1>
+    <button onclick="carregarJson()">Carregar Dados JSON</button>
+    <div id="json-data"></div>
+
+    <script>
+        function carregarJson() {
+            fetch('data.json') // Nome do arquivo JSON
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo JSON');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    exibirDados(data);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('json-data').innerText = 'Erro ao carregar dados.';
+                });
+        }
+
+        function exibirDados(data) {
+            const jsonDataDiv = document.getElementById('json-data');
+            jsonDataDiv.innerHTML = `
+                <h2>Dados JSON:</h2>
+                <p><strong>Nome:</strong> ${data.nome}</p>
+                <p><strong>Idade:</strong> ${data.idade}</p>
+                <p><strong>Cidade:</strong> ${data.cidade}</p>
+                <p><strong>Hobbies:</strong> ${data.hobbies.join(', ')}</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>
