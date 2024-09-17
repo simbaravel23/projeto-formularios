@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura de Arquivo XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #xml-data {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Leitura de Arquivo XML</h1>
+    <button onclick="carregarXml()">Carregar Dados XML</button>
+    <div id="xml-data"></div>
+
+    <script>
+        function carregarXml() {
+            fetch('data.xml') // Nome do arquivo XML
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo XML');
+                    }
+                    return response.text();
+                })
+                .then(xmlText => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+
+                    const nome = xmlDoc.getElementsByTagName('nome')[0].textContent;
+                    const idade = xmlDoc.getElementsByTagName('idade')[0].textContent;
+                    const cidade = xmlDoc.getElementsByTagName('cidade')[0].textContent;
+                    const hobbies = Array.from(xmlDoc.getElementsByTagName('hobby')).map(hobby => hobby.textContent);
+
+                    exibirDados({ nome, idade, cidade, hobbies });
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('xml-data').innerText = 'Erro ao carregar dados.';
+                });
+        }
+
+        function exibirDados(data) {
+            const xmlDataDiv = document.getElementById('xml-data');
+            xmlDataDiv.innerHTML = `
+                <h2>Dados XML:</h2>
+                <p><strong>Nome:</strong> ${data.nome}</p>
+                <p><strong>Idade:</strong> ${data.idade}</p>
+                <p><strong>Cidade:</strong> ${data.cidade}</p>
+                <p><strong>Hobbies:</strong> ${data.hobbies.join(', ')}</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>

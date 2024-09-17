@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura de Arquivo YAML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #yaml-data {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Leitura de Arquivo YAML</h1>
+    <button onclick="carregarYaml()">Carregar Dados YAML</button>
+    <div id="yaml-data"></div>
+
+    <!-- Incluindo a biblioteca js-yaml -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script>
+        function carregarYaml() {
+            fetch('data.yaml') // Nome do arquivo YAML
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo YAML');
+                    }
+                    return response.text();
+                })
+                .then(yamlText => {
+                    const data = jsyaml.load(yamlText); // Convertendo YAML para JSON
+                    exibirDados(data);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('yaml-data').innerText = 'Erro ao carregar dados.';
+                });
+        }
+
+        function exibirDados(data) {
+            const yamlDataDiv = document.getElementById('yaml-data');
+            yamlDataDiv.innerHTML = `
+                <h2>Dados YAML:</h2>
+                <p><strong>Nome:</strong> ${data.nome}</p>
+                <p><strong>Idade:</strong> ${data.idade}</p>
+                <p><strong>Cidade:</strong> ${data.cidade}</p>
+                <p><strong>Hobbies:</strong> ${data.hobbies.join(', ')}</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>

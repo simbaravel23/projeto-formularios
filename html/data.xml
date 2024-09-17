@@ -1,0 +1,10 @@
+<person>
+    <nome>Maria</nome>
+    <idade>28</idade>
+    <cidade>Rio de Janeiro</cidade>
+    <hobbies>
+        <hobby>Natação</hobby>
+        <hobby>Leitura</hobby>
+        <hobby>Viagens</hobby>
+    </hobbies>
+</person>
