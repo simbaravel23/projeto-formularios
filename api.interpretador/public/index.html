@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura de Arquivos JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #json-data {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Leitura de Arquivos JSON</h1>
+    <button onclick="carregarJsonFiles()">Carregar Dados JSON</button>
+    <div id="json-data"></div>
+
+    <script>
+        async function carregarJsonFiles() {
+            try {
+                // Obtém a lista de arquivos JSON
+                const response = await fetch('/list-json-files');
+                const files = await response.json();
+
+                const jsonDataDiv = document.getElementById('json-data');
+                jsonDataDiv.innerHTML = '';
+
+                // Carrega e exibe o conteúdo de cada arquivo JSON
+                for (const file of files) {
+                    const fileResponse = await fetch(`/data/${file}`);
+                    const data = await fileResponse.json();
+
+                    jsonDataDiv.innerHTML += `
+                        <h2>Dados do arquivo ${file}:</h2>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <hr>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('json-data').innerText = 'Erro ao carregar dados.';
+            }
+        }
+    </script>
+</body>
+
+</html>
