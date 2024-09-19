@@ -26,22 +26,34 @@
     <div id="json-data"></div>
 
     <script>
-        function carregarJson() {
-            fetch('data.json') // Nome do arquivo JSON
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo JSON');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    exibirDados(data);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    document.getElementById('json-data').innerText = 'Erro ao carregar dados.';
-                });
+   async function cargarJSON() {
+        try {
+            const response = await fetch('data.json'); // Substitua por sua URL
+
+            if (!response.ok) {
+                throw new Error('Erro ao carregar os dados.');
+            }
+
+            const data = await response.json();
+            return data; // Retorna os dados para serem utilizados em outra parte do código
+        } catch (error) {
+            console.error('Erro:', error);
+            // Exibir uma mensagem de erro para o usuário
+            alert('Ocorreu um erro ao carregar os dados. Tente novamente mais tarde.');
         }
+    }
+
+    // Chamar a função e utilizar os dados retornados
+    cargarJSON()
+        .then(data => {
+            exibirDados(data); // Assumindo que a função exibirDados está definida
+        })
+        .catch(error => {
+            console.error('Erro ao processar os dados:', error);
+        });
+
+
+        
 
         function exibirDados(data) {
             const jsonDataDiv = document.getElementById('json-data');

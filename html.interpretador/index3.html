@@ -22,34 +22,41 @@
 
 <body>
     <h1>Leitura de Arquivo XML</h1>
-    <button onclick="carregarXml()">Carregar Dados XML</button>
+    <button onclick="carregarXML()">Carregar Dados XML</button>
     <div id="xml-data"></div>
 
     <script>
-        function carregarXml() {
-            fetch('data.xml') // Nome do arquivo XML
-                .then(response => {
+
+          async function carregarXML() {
+                try {
+                    const response = await fetch('data.xml'); // Substitua por seu caminho
+
                     if (!response.ok) {
                         throw new Error('Erro ao carregar o arquivo XML');
                     }
-                    return response.text();
-                })
-                .then(xmlText => {
+
+                    const xmlText = await response.text();
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
 
+                    // Acessando os elementos XML de forma mais eficiente:
                     const nome = xmlDoc.getElementsByTagName('nome')[0].textContent;
                     const idade = xmlDoc.getElementsByTagName('idade')[0].textContent;
                     const cidade = xmlDoc.getElementsByTagName('cidade')[0].textContent;
                     const hobbies = Array.from(xmlDoc.getElementsByTagName('hobby')).map(hobby => hobby.textContent);
 
-                    exibirDados({ nome, idade, cidade, hobbies });
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    document.getElementById('xml-data').innerText = 'Erro ao carregar dados.';
-                });
-        }
+                    // Exibindo os dados:
+                  exibirDados({ nome, idade, cidade, hobbies });
+
+                } catch (error) {
+                    console.error('Erro ao carregar XML:', error);
+                    alert('Ocorreu um erro ao carregar os dados do XML. Verifique o console para mais detalhes.');
+                }
+            }
+
+            carregarXML();
+
+        
 
         function exibirDados(data) {
             const xmlDataDiv = document.getElementById('xml-data');

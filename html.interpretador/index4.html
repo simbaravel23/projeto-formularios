@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leitor de Arquivo CSV de Animais</title>
+</head>
+
+<body>
+    <input type="file" id="arquivoCSV" />
+    <button onclick="lerCSV()">Ler CSV</button>
+    <div id="resultado"></div>
+
+    <script>
+        async function lerCSV() {
+            const arquivo = document.getElementById('arquivoCSV').files[0];
+            const reader = new FileReader();
+
+            reader.readAsText(arquivo);
+
+            reader.onload = async () => {
+                try {
+                    const csvData = reader.result;
+                    const linhas = csvData.split('\n');
+                    const cabeçalho = linhas[0].split(',');
+                    const dados = [];
+
+                    for (let i = 1; i < linhas.length; i++) {
+                        const linha = linhas[i].split(',');
+                        const animal = {
+                            nome: linha[0],
+                            especie: linha[1],
+                            idade: linha[2],
+                            peso: linha[3]
+                        };
+                        dados.push(animal);
+                    }
+
+                    // Exibir os dados em uma tabela
+                    const tabela = '<table><thead><tr>';
+                    cabeçalho.forEach(cabecalho => {
+                        tabela += <th>${cabecalho}</th>;
+                    });
+                    tabela += '</tr></thead><tbody>';
+                    dados.forEach(animal => {
+                        tabela += '<tr>';
+                        tabela += <td>${animal.nome}</td>;
+                        tabela += <td>${animal.especie}</td>;
+                        tabela += <td>${animal.idade}</td>;
+                        tabela += <td>${animal.peso}</td>;
+                        tabela += '</tr>';
+                    });
+                    tabela += '</tbody></table>';
+                    document.getElementById('resultado').innerHTML = tabela;
+                } catch (error) {
+                    console.error('Erro ao ler o arquivo CSV:', error);
+                    alert('Ocorreu um erro ao ler o arquivo CSV.');
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

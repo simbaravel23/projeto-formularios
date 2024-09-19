@@ -28,23 +28,35 @@
     <!-- Incluindo a biblioteca js-yaml -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script>
-        function carregarYaml() {
-            fetch('data.yaml') // Nome do arquivo YAML
-                .then(response => {
+      
+        async function carregarYaml() {
+                try {
+                    const response = await fetch('data.yaml'); // Substitua por sua URL
+
                     if (!response.ok) {
                         throw new Error('Erro ao carregar o arquivo YAML');
                     }
-                    return response.text();
-                })
-                .then(yamlText => {
-                    const data = jsyaml.load(yamlText); // Convertendo YAML para JSON
-                    exibirDados(data);
+
+                    const yamlText = await response.text(); // Obtém o texto do arquivo YAML
+                    const data = jsyaml.load(yamlText); // Converte o texto YAML para um objeto JavaScript
+
+                    return data; // Retorna os dados para serem utilizados em outra parte do código
+                } catch (error) {
+                    console.error('Erro:', error);
+                    // Exibir uma mensagem de erro para o usuário
+                    alert('Ocorreu um erro ao carregar os dados. Tente novamente mais tarde.');
+                }
+            }
+
+            // Chamar a função e utilizar os dados retornados
+            carregarYaml()
+                .then(data => {
+                    exibirDados(data); // Assumindo que a função exibirDados está definida
                 })
                 .catch(error => {
-                    console.error('Erro:', error);
-                    document.getElementById('yaml-data').innerText = 'Erro ao carregar dados.';
+                    console.error('Erro ao processar os dados:', error);
                 });
-        }
+        
 
         function exibirDados(data) {
             const yamlDataDiv = document.getElementById('yaml-data');
