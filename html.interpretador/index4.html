@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leitor de CSV</title>
+    <title>Leitor de CSV via Fetch</title>
 </head>
 <body>
-    <input type="file" id="csvFile">
-    <button onclick="readCSV()">Ler CSV</button>
     <div id="result"></div>
 
     <script>
         async function readCSV() {
-            const file = document.getElementById('csvFile').files[0];
-            const reader = new FileReader();
-            reader.readAsText(file);
+            const response = await fetch('data.csv');
+            const csvData = await response.text();
 
-            const csvData = await reader.readAsText();
             const rows = csvData.split('\n');
             let result = '';
 
@@ -25,6 +21,8 @@
 
             document.getElementById('result').innerHTML = result;
         }
+
+        readCSV();
     </script>
 </body>
 </html>
