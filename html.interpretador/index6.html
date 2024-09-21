@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leitor de CSV via Fetch</title>
+</head>
+
+<body>
+    <div id="resultado"></div>
+
+    <script>
+        // Substitua 'seu_arquivo.csv' pelo caminho real do seu arquivo
+        const url = 'data.csv';
+
+        async function lerCSV(url) {
+            try {
+                const response = await fetch(url);
+                const csvData = await response.text();
+
+                // Processar o CSV (mesmo código do exemplo anterior)
+                const linhas = csvData.split('\n');
+                const cabeçalho = linhas[0].split(',');
+                const dados = linhas.slice(1).map(linha => linha.split(','));
+
+                // Criar a tabela HTML
+                // ... (mesmo código do exemplo anterior)
+
+                document.getElementById('resultado').appendChild(tabela);
+            } catch (error) {
+                console.error('Erro ao ler o CSV:', error);
+            }
+        }
+
+        lerCSV(url);
+    </script>
+</body>
+
+</html>

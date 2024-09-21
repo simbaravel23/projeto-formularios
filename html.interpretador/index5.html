@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leitor de CSV</title>
+</head>
+
+<body>
+    <input type="file" id="fileInput">
+    <button onclick="lerCSV()">Ler CSV</button>
+    <div id="resultado"></div>
+
+    <script>
+        async function lerCSV() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.readAsText(file);
+
+                reader.onload = async () => {
+                    const csvData = reader.result;
+                    const linhas = csvData.split('\n');
+                    const cabeçalho = linhas[0].split(',');
+                    const dados = linhas.slice(1).map(linha => linha.split(','));
+
+                    const tabela = document.createElement('table');
+                    const linhaCabecalho = tabela.insertRow();
+                    cabeçalho.forEach(celula => {
+                        const th = document.createElement('th');
+                        th.textContent = celula;
+                        linhaCabecalho.appendChild(th);
+                    });
+
+                    dados.forEach(linha => {
+                        const linhaTabela = tabela.insertRow();
+                        linha.forEach(celula => {
+                            const td = document.createElement('td');
+                            td.textContent = celula;
+                            linhaTabela.appendChild(td);
+                        });
+                    });
+
+                    document.getElementById('resultado').appendChild(tabela);
+                };
+            }
+        }
+    </script>
+</body>
+
+</html>

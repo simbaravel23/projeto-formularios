@@ -2,61 +2,41 @@
 <html>
 
 <head>
-    <title>Leitor de Arquivo CSV de Animais</title>
+    <title>Leitor de CSV via Fetch</title>
 </head>
 
 <body>
-    <input type="file" id="arquivoCSV" />
-    <button onclick="lerCSV()">Ler CSV</button>
-    <div id="resultado"></div>
+    <h1>Leitor de CSV</h1>
+    <div id="result">buscando...</div>
 
     <script>
-        async function lerCSV() {
-            const arquivo = document.getElementById('arquivoCSV').files[0];
-            const reader = new FileReader();
+        async function readCSV() {
+            try {
+                const response = await fetch('data.csv');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar o arquivo');
 
-            reader.readAsText(arquivo);
 
-            reader.onload = async () => {
-                try {
-                    const csvData = reader.result;
-                    const linhas = csvData.split('\n');
-                    const cabeçalho = linhas[0].split(',');
-                    const dados = [];
+                    const csvData = await response.text();
 
-                    for (let i = 1; i < linhas.length; i++) {
-                        const linha = linhas[i].split(',');
-                        const animal = {
-                            nome: linha[0],
-                            especie: linha[1],
-                            idade: linha[2],
-                            peso: linha[3]
-                        };
-                        dados.push(animal);
-                    }
+                    const rows = csvData.split('\n');
+                    let result = '';
 
-                    // Exibir os dados em uma tabela
-                    const tabela = '<table><thead><tr>';
-                    cabeçalho.forEach(cabecalho => {
-                        tabela += <th>${cabecalho}</th>;
+                    rows.forEach(row => {
+                        const columns = row.split(',');
+                        result += `<p>${columns.join(' | ')}</p>`;
                     });
-                    tabela += '</tr></thead><tbody>';
-                    dados.forEach(animal => {
-                        tabela += '<tr>';
-                        tabela += <td>${animal.nome}</td>;
-                        tabela += <td>${animal.especie}</td>;
-                        tabela += <td>${animal.idade}</td>;
-                        tabela += <td>${animal.peso}</td>;
-                        tabela += '</tr>';
-                    });
-                    tabela += '</tbody></table>';
-                    document.getElementById('resultado').innerHTML = tabela;
-                } catch (error) {
-                    console.error('Erro ao ler o arquivo CSV:', error);
-                    alert('Ocorreu um erro ao ler o arquivo CSV.');
+
+                    document.getElementById('result').innerHTML = result;
                 }
-            };
+
+                  } catch (error) {
+                console.error('Erro:', error);
+            }
         }
+                readCSV();
+
+          
     </script>
 </body>
 
