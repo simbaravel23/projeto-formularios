@@ -8,7 +8,12 @@
 
     <script>
         async function readCSV() {
+           try {
             const response = await fetch('data.csv');
+            if (!response.ok) {
+            throw new Error('Erro ao buscar o arquivo');
+
+
             const csvData = await response.text();
 
             const rows = csvData.split('\n');
@@ -23,6 +28,15 @@
         }
 
         readCSV();
+
+} catch (error) {
+        console.error('Erro:', error);
+    }
+}
     </script>
 </body>
 </html>
+
+
+
+
